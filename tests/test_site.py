@@ -47,7 +47,7 @@ FORBIDDEN_TEXT = [
     "80-person team", "100% reduction", "100% fewer",
     "already past their deadline", "has already passed", "clearer and smaller",
     "biggest declines", "not a knowledge gap",
-    "Salesforce", "SharePoint", "OneNote", "password", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
+    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
     "didn't always agree", "databases that didn't agree",
 ]
 
