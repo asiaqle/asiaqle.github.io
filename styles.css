@@ -117,11 +117,16 @@ strong { font-weight: 500; }
 /* Cyanotype flower */
 .bloom { position: absolute; pointer-events: none; color: var(--bloom); --vein: var(--bloom-vein); }
 .bloom use { color: inherit; }
-.hero .bloom { right: -40px; top: -30px; width: 120px; opacity: 0.3; }
+.hero .bloom { right: -8px; top: -30px; width: 110px; opacity: 0.3; }
+main { overflow-x: clip; }
 .page-head { position: relative; }
-.page-head .bloom { right: -20px; top: -10px; width: 150px; opacity: 0.25; }
-@media (max-width: 600px) {
-  .page-head .bloom, .band .bloom { display: none; }
+.page-head .bloom { right: 0; top: 10px; width: 150px; opacity: 0.25; }
+.page-head > :not(.bloom) { max-width: 44rem; }
+@media (max-width: 779px) {
+  .band .bloom { display: none; }
+}
+@media (max-width: 999px) {
+  .page-head .bloom { display: none; }
 }
 @media (min-width: 780px) {
   .hero { padding-right: min(30vw, 340px); }
@@ -244,7 +249,7 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
 
 @media (min-width: 780px) {
   .wrap, .topbar { padding-left: 32px; padding-right: 32px; }
-  .band .wrap { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; }
+  .band .wrap { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; padding-right: 230px; }
   .stat { border-top: 0; border-left: 1px solid rgba(207, 201, 195, 0.35); padding: 6px 0 6px 18px; }
 }
 
