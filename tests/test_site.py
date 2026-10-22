@@ -502,6 +502,16 @@ class SiteTests(unittest.TestCase):
             with self.subTest(fact=f):
                 self.assertIn(f, facts.group(1))
 
+    def test_about_has_no_employer_names(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        about = re.search(r'<section aria-labelledby="about">(.*?)</section>', html, re.S).group(1)
+        for name in ("VNS", "Northwell", "Long Island Jewish"):
+            with self.subTest(name=name):
+                self.assertNotIn(name, about)
+        for desc in ("New York health plan", "managed care organization", "inpatient hospital"):
+            with self.subTest(desc=desc):
+                self.assertIn(desc, about)
+
     def test_about_image_size(self):
         img = ROOT / "assets" / "about.jpg"
         self.assertTrue(img.is_file())
