@@ -21,6 +21,7 @@ REQUIRED_TEXT = {
     "index.html": [
         "Asia Le", "Now I fix the workflows", "30%", "fewer review delays", "person rollout",
         "50%", "faster record retrieval", "CMS", "asiaqle@gmail.com", "linkedin.com/in/asiaqle",
+        "Sunrise EHR", "eClinicalWorks",
     ],
     "oon-decision-tree.html": [
         "50 reviewers across an 80-person department", "30%", "100% compliance", "Part B",
