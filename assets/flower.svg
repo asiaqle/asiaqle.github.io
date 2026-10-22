@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <symbol id="flower" viewBox="-120 -120 240 240">
+    <g fill="currentColor">
+      <path id="petal" d="M0 -14 C 26 -40 34 -80 0 -112 C -34 -80 -26 -40 0 -14Z"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(51)"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(103)"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(154)"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(206)"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(257)"/>
+      <use href="#petal" xlink:href="#petal" transform="rotate(309)"/>
+    </g>
+    <g fill="none" stroke="var(--vein, #ECE8E1)" stroke-width="1.2" opacity="0.6">
+      <path id="vein" d="M0 -18 L0 -104 M0 -50 L12 -70 M0 -50 L-12 -70 M0 -78 L9 -94 M0 -78 L-9 -94"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(51)"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(103)"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(154)"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(206)"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(257)"/>
+      <use href="#vein" xlink:href="#vein" transform="rotate(309)"/>
+    </g>
+    <circle r="18" fill="var(--vein, #ECE8E1)" opacity="0.7"/>
+  </symbol>
+</svg>

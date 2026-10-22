@@ -50,6 +50,17 @@ FORBIDDEN_TEXT = [
     "didn't always agree", "databases that didn't agree",
 ]
 
+PALETTE = {
+    "--linen": "#ECE8E1", "--sand": "#D8CBB2", "--clay": "#CFC9C3", "--harbor": "#3F5F86",
+    "--sky": "#6F9FC8", "--ink": "#1F3048", "--ink-2": "#4A5A6E", "--rule": "#C9C2B6", "--on-harbor": "#D9DFE8",
+}
+
+TOPBAR = {
+    "index.html": "001 // Health tech product", "oon-decision-tree.html": "Case 01",
+    "expedited-loophole.html": "Case 02", "port-troubleshooting.html": "Case 03",
+    "prior-auth-intake.html": "Recommendation", "ai-clinical-review.html": "Concept",
+}
+
 STATUS = {
     "oon-decision-tree.html": "Shipped",
     "expedited-loophole.html": "Shipped",
@@ -296,21 +307,65 @@ class SiteTests(unittest.TestCase):
                                  capture_output=True, text=True, check=True).stdout
         self.assertNotIn("docs/superpowers", history)
 
-    def test_light_mode_muted_text_contrast(self):
-        css = (ROOT / "styles.css").read_text(encoding="utf-8")
-        root = css.split("@media")[0]
+    @staticmethod
+    def _tokens(block):
+        return dict(re.findall(r"(--[a-z0-9-]+):\s*(#[0-9a-fA-F]{6})", block))
 
+    @staticmethod
+    def _contrast(a, b):
         def lum(hex_color):
             rgb = [int(hex_color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
             lin = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
             return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+        hi, lo = sorted([lum(a), lum(b)], reverse=True)
+        return (hi + 0.05) / (lo + 0.05)
 
-        bg = re.search(r"--bg:\s*(#[0-9a-fA-F]{6})", root).group(1)
-        for token in ("--text-2", "--text-3"):
-            fg = re.search(token + r":\s*(#[0-9a-fA-F]{6})", root).group(1)
-            hi, lo = sorted([lum(bg), lum(fg)], reverse=True)
-            with self.subTest(token=token):
-                self.assertGreaterEqual((hi + 0.05) / (lo + 0.05), 4.5)
+    def _css_blocks(self):
+        css = (ROOT / "styles.css").read_text(encoding="utf-8")
+        light = css.split("@media")[0]
+        dark = re.search(r"prefers-color-scheme:\s*dark\)\s*\{(.*?)\}\s*\}", css, re.S)
+        return light, (dark.group(1) if dark else "")
+
+    def test_palette_tokens(self):
+        light = self._tokens(self._css_blocks()[0])
+        for name, value in PALETTE.items():
+            with self.subTest(token=name):
+                self.assertEqual(light.get(name, "").lower(), value.lower())
+
+    def test_contrast_pairs(self):
+        light, dark = self._css_blocks()
+        lt, dk = self._tokens(light), self._tokens(dark)
+        pairs = [("light ink-2 on linen", lt.get("--ink-2"), lt.get("--linen")),
+                 ("light ink on linen", lt.get("--ink"), lt.get("--linen")),
+                 ("on-harbor on harbor", lt.get("--on-harbor"), lt.get("--harbor")),
+                 ("dark text on bg", dk.get("--text"), dk.get("--bg")),
+                 ("dark text-2 on bg", dk.get("--text-2"), dk.get("--bg")),
+                 ("dark accent on bg", dk.get("--accent"), dk.get("--bg"))]
+        for label, fg, bg in pairs:
+            with self.subTest(pair=label):
+                self.assertTrue(fg and bg, "token missing")
+                self.assertGreaterEqual(self._contrast(fg, bg), 4.5)
+
+    def test_fonts_loaded(self):
+        for page, info in self.pages.items():
+            fonts = [h for h in info.stylesheets if h.startswith("https://fonts.googleapis.com/")]
+            with self.subTest(page=page):
+                self.assertTrue(any("Fraunces" in h and "Inter" in h for h in fonts))
+
+    def test_topbar(self):
+        for page in PAGES:
+            html = (ROOT / page).read_text(encoding="utf-8")
+            m = re.search(r'class="topbar"[^>]*>(.*?)</div>', html, re.S)
+            with self.subTest(page=page):
+                self.assertIsNotNone(m, "no .topbar")
+                text = " ".join(re.sub(r"<[^>]+>", " ", m.group(1)).split())
+                self.assertIn("Portfolio of Asia Le, RN · 2026", text)
+                self.assertIn(TOPBAR[page], text)
+
+    def test_flower_asset_has_symbol(self):
+        svg = ROOT / "assets" / "flower.svg"
+        self.assertTrue(svg.is_file())
+        self.assertIn('<symbol id="flower"', svg.read_text(encoding="utf-8"))
 
     def test_updated_resume_backs_site_metrics(self):
         text = subprocess.run(["textutil", "-convert", "txt", "-stdout",
