@@ -117,12 +117,15 @@ strong { font-weight: 500; }
 /* Cyanotype flower */
 .bloom { position: absolute; pointer-events: none; color: var(--bloom); --vein: var(--bloom-vein); }
 .bloom use { color: inherit; }
-.hero .bloom { right: -30px; top: 10px; width: min(38vw, 380px); opacity: 0.35; }
+.hero .bloom { right: -40px; top: -30px; width: 120px; opacity: 0.3; }
 .page-head { position: relative; }
 .page-head .bloom { right: -20px; top: -10px; width: 150px; opacity: 0.25; }
 @media (max-width: 600px) {
-  .hero .bloom { width: 170px; right: -50px; top: -20px; opacity: 0.22; }
-  .page-head .bloom { display: none; }
+  .page-head .bloom, .band .bloom { display: none; }
+}
+@media (min-width: 780px) {
+  .hero { padding-right: min(30vw, 340px); }
+  .hero .bloom { right: -30px; top: 40px; width: min(28vw, 320px); opacity: 0.35; }
 }
 
 /* Navy results band */

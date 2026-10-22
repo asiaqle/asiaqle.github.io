@@ -362,6 +362,17 @@ class SiteTests(unittest.TestCase):
                 self.assertIn("Portfolio of Asia Le, RN · 2026", text)
                 self.assertIn(TOPBAR[page], text)
 
+    def test_home_structure(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        hero = re.search(r'<section class="hero"[^>]*>(.*?)</section>', html, re.S)
+        self.assertIsNotNone(hero, "no .hero section")
+        self.assertIn("<h1", hero.group(1))
+        self.assertEqual(html.count('class="band"'), 1)
+        band = re.search(r'class="band"[^>]*>(.*?)</section>', html, re.S).group(1)
+        self.assertEqual(len(re.findall(r'class="stat"', band)), 4)
+        self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 2)
+        self.assertEqual(re.findall(r'class="sec-num"[^>]*>([^<]+)<', html), ["001", "002", "003", "004"])
+
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"
         self.assertTrue(svg.is_file())
