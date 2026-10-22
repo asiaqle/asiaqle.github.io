@@ -17,9 +17,12 @@
 <div class="topbar"><span class="meta">/ Portfolio of Asia Le, RN · 2026 /</span><span class="meta">Case 01</span></div>
 <main class="wrap">
   <a class="back-link" href="index.html">← All work</a>
+  <header class="page-head">
+  <svg class="bloom" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="assets/flower.svg#flower" width="240" height="240"/></svg>
   <div class="meta-row"><span class="case-num">Case study 01</span><span class="status status--shipped">Shipped</span></div>
   <h1>Getting 50 reviewers to one decision path</h1>
   <p class="lede">Out-of-network reviews at our health plan depended on rules people passed along by word of mouth and on manual checks across several systems. I led a cross-functional effort to turn that into one live decision path. It was rolled out to 50 reviewers across an 80-person department, and review delays fell by 30%.</p>
+  </header>
 
   <ul class="tiles" aria-label="Results">
     <li class="tile"><span class="tile-num">30%</span><span class="tile-label">fewer review delays</span></li>
@@ -27,6 +30,33 @@
     <li class="tile"><span class="tile-num">50</span><span class="tile-label">reviewers adopted it</span></li>
     <li class="tile"><span class="tile-num">1</span><span class="tile-label">live source of truth</span></li>
   </ul>
+
+<figure class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 360 430" role="img" aria-label="Decision path: check network status, line of business and enrollment date. If the request is within 90 days of enrollment, check whether the member is an established patient; if yes, approve for continuity of care. If the request is not within 90 days, or the member is not an established patient, search for an in-network provider within 30 miles, then decide."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
+
+<path class="ln" d="M40 40 V 390"/>
+<path class="ln" d="M40 190 C 40 225 200 205 200 238"/>
+<path class="ln" d="M200 246 V 292" marker-end="url(#arw)"/>
+<path class="ln" d="M200 246 C 200 300 40 290 40 334" marker-end="url(#arw)"/>
+<circle class="node" cx="40" cy="40" r="6"/><circle class="node" cx="40" cy="90" r="6"/><circle class="node" cx="40" cy="140" r="6"/>
+<circle class="node" cx="40" cy="190" r="9"/><circle class="dot" cx="40" cy="190" r="3"/>
+<circle class="node" cx="200" cy="240" r="9"/><circle class="dot" cx="200" cy="240" r="3"/>
+<circle class="node" cx="200" cy="300" r="6"/>
+<circle class="node" cx="40" cy="340" r="6"/><circle class="node" cx="40" cy="390" r="6"/>
+<text x="58" y="45">Network status</text>
+<text x="58" y="95">Line of business</text>
+<text x="58" y="145">Enrollment date</text>
+<text x="58" y="195">Within 90 days?</text>
+<text class="lbl" x="96" y="236">YES</text>
+<text x="218" y="245">Established patient?</text>
+<text class="lbl" x="208" y="276">YES</text>
+<text x="218" y="305">Continuity of care</text>
+<text class="lbl" x="128" y="306">NO</text>
+<text class="lbl" x="14" y="270" transform="rotate(-90 14 270)">NO</text>
+<text x="58" y="345">In-network within 30 mi?</text>
+<text x="58" y="395">Decision</text>
+</svg>
+</figure>
 
   <h2>Context</h2>
   <p>When a Medicare Advantage, D-SNP or Medicaid member asks to see a provider outside the plan's network, a nurse reviewer decides whether the plan covers it. That decision has to follow CMS rules and meet strict deadlines. I'm one of those reviewers, so I lived this workflow every day.</p>

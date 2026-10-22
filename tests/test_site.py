@@ -61,6 +61,27 @@ TOPBAR = {
     "prior-auth-intake.html": "Recommendation", "ai-clinical-review.html": "Concept",
 }
 
+INNER_PAGES = ["oon-decision-tree.html", "expedited-loophole.html", "port-troubleshooting.html",
+               "prior-auth-intake.html", "ai-clinical-review.html"]
+
+# Labels the approved redesign spec lists for the diagrams (2026-10-22). Other diagram words must come from the page.
+APPROVED_DIAGRAM_LABELS = [
+    "Network status", "Line of business", "Enrollment date", "Within 90 days?", "Established patient?",
+    "Continuity of care", "In-network within 30 mi?", "Decision", "YES", "NO",
+    "Same-day decision avoids the letter", "Providers learn “expedited” = fast",
+    "Routine requests marked expedited", "Reviewers overloaded",
+    "Current state", "The gap", "Desired state", "Senior nurses", "Check-off checklist", "New nurses",
+    "Escalation policy", "Did we fix it?", "Leading indicators", "Guardrails", "Efficiency and adoption",
+    "The model drafts", "The nurse decides",
+]
+
+
+def _words(text):
+    return {w.strip(".,?:;“”\"'()").lower() for w in text.split()} - {""}
+
+
+DIAGRAM_WHITELIST = set().union(*(_words(label) for label in APPROVED_DIAGRAM_LABELS))
+
 STATUS = {
     "oon-decision-tree.html": "Shipped",
     "expedited-loophole.html": "Shipped",
@@ -372,6 +393,45 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r'class="stat"', band)), 4)
         self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 2)
         self.assertEqual(re.findall(r'class="sec-num"[^>]*>([^<]+)<', html), ["001", "002", "003", "004"])
+
+    @staticmethod
+    def _diagrams(html):
+        return re.findall(r'<svg[^>]*class="diagram"[^>]*>.*?</svg>', html, re.S)
+
+    def test_one_diagram_per_inner_page(self):
+        for page in INNER_PAGES:
+            html = (ROOT / page).read_text(encoding="utf-8")
+            svgs = self._diagrams(html)
+            with self.subTest(page=page):
+                self.assertEqual(len(svgs), 1)
+                self.assertIn('role="img"', svgs[0])
+                label = re.search(r'aria-label="([^"]*)"', svgs[0])
+                self.assertTrue(label and label.group(1).strip())
+
+    def test_diagram_labels_from_page(self):
+        for page in INNER_PAGES:
+            html = (ROOT / page).read_text(encoding="utf-8")
+            svgs = self._diagrams(html)
+            outside = re.sub(r"<svg.*?</svg>", " ", html, flags=re.S)
+            outside = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", outside, flags=re.S)
+            page_words = _words(re.sub(r"<[^>]+>", " ", outside).replace("&amp;", "&"))
+            for svg in svgs:
+                texts = re.findall(r"<(?:text|tspan)[^>]*>([^<]+)<", svg)
+                for word in _words(" ".join(texts)):
+                    with self.subTest(page=page, word=word):
+                        self.assertTrue(word in page_words or word in DIAGRAM_WHITELIST, word)
+
+    def test_svg_no_hardcoded_colors(self):
+        for page in INNER_PAGES:
+            for svg in self._diagrams((ROOT / page).read_text(encoding="utf-8")):
+                with self.subTest(page=page):
+                    self.assertNotRegex(svg, r'(fill|stroke)="#')
+
+    def test_inner_pages_at_most_one_bloom(self):
+        for page in INNER_PAGES:
+            html = (ROOT / page).read_text(encoding="utf-8")
+            with self.subTest(page=page):
+                self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 1)
 
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"

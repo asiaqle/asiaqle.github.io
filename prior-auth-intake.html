@@ -17,9 +17,26 @@
 <div class="topbar"><span class="meta">/ Portfolio of Asia Le, RN · 2026 /</span><span class="meta">Recommendation</span></div>
 <main class="wrap">
   <a class="back-link" href="index.html">← All work</a>
+  <header class="page-head">
+  <svg class="bloom" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="assets/flower.svg#flower" width="240" height="240"/></svg>
   <div class="meta-row"><span class="status status--recommendation">Recommendation</span></div>
   <h1>Fixing prior auth intake at the source</h1>
   <p class="lede">I mapped how prior authorization requests reach our team by fax, phone and portal, traced why some reached us with much of their deadline already used up, and recommended a phased fix with a plan for measuring it. This is a recommendation and hasn't been implemented yet.</p>
+  </header>
+
+<figure class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 360 330" role="img" aria-label="Four nested tiers of measures. At the center: did we fix it. Around it: leading indicators. Around that: guardrails. Outermost: efficiency and adoption."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
+
+<circle class="ln" cx="180" cy="168" r="152"/>
+<circle class="ln" cx="180" cy="168" r="116"/>
+<circle class="ln" cx="180" cy="168" r="80"/>
+<circle class="node" cx="180" cy="168" r="44"/>
+<text x="180" y="40" text-anchor="middle">Efficiency and adoption</text>
+<text x="180" y="72" text-anchor="middle">Guardrails</text>
+<text x="180" y="108" text-anchor="middle">Leading indicators</text>
+<text x="180" y="164" text-anchor="middle">Did we</text><text x="180" y="181" text-anchor="middle">fix it?</text>
+</svg>
+</figure>
 
   <h2>The problem</h2>
   <p>A late-entry authorization is a request that gets created in our system after its regulatory clock has already started running. The clock starts when the request arrives, not when someone enters it. There were two main causes:</p>

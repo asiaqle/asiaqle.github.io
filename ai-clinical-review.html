@@ -17,9 +17,28 @@
 <div class="topbar"><span class="meta">/ Portfolio of Asia Le, RN · 2026 /</span><span class="meta">Concept</span></div>
 <main class="wrap">
   <a class="back-link" href="index.html">← All work</a>
+  <header class="page-head">
+  <svg class="bloom" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="assets/flower.svg#flower" width="240" height="240"/></svg>
   <div class="meta-row"><span class="status status--concept">Concept</span></div>
   <h1>AI-assisted clinical review</h1>
   <p class="lede">A product concept for utilization management review: what a model could prepare before a nurse opens a case, where the nurse still has to decide, how it could go wrong, and how to measure it. It builds on my <a href="oon-decision-tree.html">out-of-network decision path</a> and my <a href="prior-auth-intake.html">prior auth intake recommendation</a>. This is a concept. It isn't built or piloted.</p>
+  </header>
+
+<figure class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 360 300" role="img" aria-label="Five steps, each prepared by the model and decided by the nurse: triage, administrative checks, clinical completeness, criteria match and documentation. The nurse confirms routing, spot-checks, sends the requests, marks the checklist and signs off."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
+
+<text class="lbl" x="20" y="20">THE MODEL DRAFTS</text>
+<text class="lbl" x="200" y="20">THE NURSE DECIDES</text>
+<path class="ln" d="M20 30 H 340"/>
+<g>
+<circle class="node" cx="26" cy="64" r="5"/><text x="40" y="69">Triage</text><path class="ln" d="M150 64 H 186" marker-end="url(#arw)"/><text x="200" y="69">Confirms routing</text>
+<circle class="node" cx="26" cy="114" r="5"/><text x="40" y="111">Administrative</text><text x="40" y="127">checks</text><path class="ln" d="M150 114 H 186" marker-end="url(#arw)"/><text x="200" y="119">Spot-checks</text>
+<circle class="node" cx="26" cy="164" r="5"/><text x="40" y="161">Clinical</text><text x="40" y="177">completeness</text><path class="ln" d="M150 164 H 186" marker-end="url(#arw)"/><text x="200" y="169">Sends the requests</text>
+<circle class="node" cx="26" cy="214" r="5"/><text x="40" y="219">Criteria match</text><path class="ln" d="M150 214 H 186" marker-end="url(#arw)"/><text x="200" y="219">Marks the checklist</text>
+<circle class="node" cx="26" cy="264" r="5"/><text x="40" y="269">Documentation</text><path class="ln" d="M150 264 H 186" marker-end="url(#arw)"/><text x="200" y="269">Signs off</text>
+</g>
+</svg>
+</figure>
 
   <h2>The review today</h2>
   <p>I review Medicare Advantage and D-SNP prior authorization requests against coverage guidelines every day. A typical review looks like this:</p>

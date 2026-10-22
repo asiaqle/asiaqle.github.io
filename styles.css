@@ -195,7 +195,7 @@ strong { font-weight: 500; }
 .diagram .node { fill: var(--bg); stroke: currentColor; stroke-width: 1.2; }
 .diagram .dot { fill: currentColor; }
 .diagram .box { fill: var(--pill-fill); stroke: currentColor; stroke-width: 1; }
-.diagram text { font-family: var(--sans); font-size: 13px; fill: var(--text); }
+.diagram text { font-family: var(--sans); font-size: 13px; fill: var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 5px; stroke-linejoin: round; }
 .diagram .lbl { font-size: 11px; letter-spacing: 0.08em; fill: var(--text-2); }
 .diagram-narrow { display: none; }
 @media (max-width: 600px) {
@@ -246,4 +246,21 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
   .wrap, .topbar { padding-left: 32px; padding-right: 32px; }
   .band .wrap { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; }
   .stat { border-top: 0; border-left: 1px solid rgba(207, 201, 195, 0.35); padding: 6px 0 6px 18px; }
+}
+
+/* Result tiles on case pages */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+}
+.tile { border-top: 1px solid var(--line); padding: 14px 0; margin: 0; }
+.tile-num { display: block; font-family: var(--serif); font-weight: 300; font-size: 2.4rem; line-height: 1.05; color: var(--accent); }
+.tile-label { display: block; font-size: 14px; color: var(--text-2); line-height: 1.4; margin-top: 4px; }
+.diagram-wrap { max-width: 34rem; }
+@media (min-width: 780px) {
+  .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
