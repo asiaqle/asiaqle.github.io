@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting 50 reviewers to one decision path · Asia Le</title>
+  <meta name="description" content="Case study: replacing word-of-mouth out-of-network review rules with one live decision path, adopted by 50 reviewers, with 30% fewer review delays.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Getting 50 reviewers to one decision path">
+  <meta property="og:description" content="Out-of-network reviews ran on word of mouth and manual checks across several systems. A live decision path cut review delays by 30%.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back-link" href="index.html">← All work</a>
+  <div class="meta-row"><span class="case-num">Case study 01</span><span class="status status--shipped">Shipped</span></div>
+  <h1>Getting 50 reviewers to one decision path</h1>
+  <p class="lede">Out-of-network reviews at our health plan depended on rules people passed along by word of mouth and on manual checks across several systems. I led a cross-functional effort to turn that into one live decision path. It was rolled out to 50 reviewers across an 80-person department, and review delays fell by 30%.</p>
+
+  <ul class="tiles" aria-label="Results">
+    <li class="tile"><span class="tile-num">30%</span><span class="tile-label">fewer review delays</span></li>
+    <li class="tile"><span class="tile-num">100%</span><span class="tile-label">compliance on expedited and Part B</span></li>
+    <li class="tile"><span class="tile-num">50</span><span class="tile-label">reviewers adopted it</span></li>
+    <li class="tile"><span class="tile-num">1</span><span class="tile-label">live source of truth</span></li>
+  </ul>
+
+  <h2>Context</h2>
+  <p>When a Medicare Advantage, D-SNP or Medicaid member asks to see a provider outside the plan's network, a nurse reviewer decides whether the plan covers it. That decision has to follow CMS rules and meet strict deadlines. I'm one of those reviewers, so I lived this workflow every day.</p>
+
+  <h2>The problem</h2>
+  <p>For every out-of-network request, a reviewer worked through these checks by hand:</p>
+  <ol>
+    <li>Confirm the provider's network status, checking more than one system.</li>
+    <li>Check the member's eligibility and line of business.</li>
+    <li>Check the member's enrollment date.</li>
+    <li>If the request came within 90 days of enrollment, look for documentation that the member was already the provider's patient before joining the plan. If so, approve for continuity of care and request a single-case agreement.</li>
+    <li>If not, search for an in-network provider within 30 miles of the member's home, using the public find-a-doctor tool and then Google Maps to check the actual driving distance.</li>
+    <li>If at least one in-network provider could deliver the service, deny the request.</li>
+  </ol>
+  <p>Matching each case by hand against several sources of truth meant double work and plenty of room for error. Many reviewers struggled to get through the logic at all. The rules themselves lived in word of mouth and inherited personal notes, so each person's version was slightly different.</p>
+
+  <h2>Options considered</h2>
+  <ul>
+    <li><strong>More training.</strong> We tried it, with monthly meetings. Each meeting raised more questions than it answered, and reviewers told us they wanted something written down. The plan was also growing fast, with new hires arriving all the time, so training would never stay current.</li>
+    <li><strong>Have IT reconcile the systems.</strong> That work is still in progress, so it couldn't help reviewers right away.</li>
+    <li><strong>A written decision path (chosen).</strong> It lives as official written policy on the department's shared site, so every reviewer, including next month's new hires, works from the same live document.</li>
+  </ul>
+
+  <h2>Stakeholders</h2>
+  <p>I worked with leadership, compliance, appeals and the authorization department.</p>
+  <ul>
+    <li><strong>Compliance</strong> had to confirm that every determination the decision path produced matched CMS regulations.</li>
+    <li><strong>The authorization department</strong> pushed back, because the new workflow put direct responsibility on their team.</li>
+  </ul>
+  <p>We resolved the pushback in two ways. We added mandatory fields to the authorization portal so a request couldn't be created incomplete, which made their part of the work clear and enforceable. Leadership also formally defined the auth coordinator's role. Until then, a lot of that work had quietly fallen to reviewers.</p>
+
+  <h2>What we shipped</h2>
+  <p>A decision-tree job aid, approved by senior leadership, published as official department policy, with matching mandatory intake fields and a defined auth coordinator role. It was rolled out to 50 reviewers across an 80-person department.</p>
+
+  <h2>Outcome</h2>
+  <p>Internal compliance auditing compared the three months after rollout with the three months before. Review delays fell by 30%, and we kept 100% compliance on expedited and Part B requirements.</p>
+  <p>I also contributed to a dashboard tracking out-of-network use, which feeds decisions about where to grow the network.</p>
+
+  <h2>What I'd do next</h2>
+  <p>The slowest steps are still the lookups: checking network status in two systems and measuring driving distance by hand. Those are good candidates for automation, with a nurse still making the final call. I'm exploring that in <a href="ai-clinical-review.html">AI-assisted clinical review</a>.</p>
+</main>
+<footer class="site-footer">
+  <p><a href="index.html">Asia Le, RN</a> · <a href="mailto:asiaqle@gmail.com">asiaqle@gmail.com</a></p>
+  <p>Described at a process level. No member or patient information appears on this site.</p>
+</footer>
+</body>
+</html>

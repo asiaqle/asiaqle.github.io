@@ -1,0 +1,7 @@
+source/
+.superpowers/
+.DS_Store
+.claude/
+docs/
+*.docx
+~$*

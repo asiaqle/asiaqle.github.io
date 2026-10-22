@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fixing prior auth intake at the source · Asia Le</title>
+  <meta name="description" content="Recommendation: why late prior authorizations arrived in waves, a plan to move providers from fax to the portal, and a tiered framework for measuring it.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fixing prior auth intake at the source">
+  <meta property="og:description" content="Late authorizations kept arriving in waves because nobody could see the fax backlog building. A recommendation and a measurement plan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back-link" href="index.html">← All work</a>
+  <div class="meta-row"><span class="status status--recommendation">Recommendation</span></div>
+  <h1>Fixing prior auth intake at the source</h1>
+  <p class="lede">I mapped how prior authorization requests reach our team by fax, phone and portal, traced why some reached us with much of their deadline already used up, and recommended a phased fix with a plan for measuring it. This is a recommendation and hasn't been implemented yet.</p>
+
+  <h2>The problem</h2>
+  <p>A late-entry authorization is a request that gets created in our system after its regulatory clock has already started running. The clock starts when the request arrives, not when someone enters it. There were two main causes:</p>
+  <ul>
+    <li><strong>Fax server delays,</strong> the biggest cause. Faxed requests could sit in a backed-up server before anyone saw them.</li>
+    <li><strong>Requests entered under the wrong member,</strong> so they effectively didn't exist for the right person until someone noticed.</li>
+  </ul>
+
+  <h2>The insight: we only found out after the fact</h2>
+  <p>Nobody could see the fax backlog building. We learned the servers had backed up when workload suddenly spiked with a wave of authorizations that were already late and hard to catch up on. The real problem wasn't only the delay. It was that the delay was invisible until it became a crisis.</p>
+
+  <h2>What I recommended</h2>
+  <ol>
+    <li><strong>Move providers from fax to the portal.</strong> Portal requests arrive as structured data in real time, with no server to back up and less room to attach a request to the wrong member. UM supervisors would start with outreach to the providers who send the most faxes.</li>
+    <li><strong>Automatically extract key fields from the faxes that remain,</strong> so they reach the review queue faster and with fewer entry errors.</li>
+  </ol>
+  <p>The portal shift also lines up with where the industry is going: the CMS prior authorization API requirements taking effect in 2027 push plans toward electronic submission.</p>
+
+  <h2>How I'd measure it</h2>
+  <p>I organized the measures into four tiers, pairing speed measures like receipt-to-intake lag with guardrails like overturn rate on appeal, so faster intake can't come at the cost of worse decisions. All targets below are proposed, not results.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Tier</th><th scope="col">Measure</th><th scope="col">Proposed target</th></tr></thead>
+      <tbody>
+        <tr><td>1. Did we fix it?</td><td>Audit universe match rate; timeliness breach count</td><td>—</td></tr>
+        <tr><td rowspan="6">2. Leading indicators (where the backlog lives)</td><td>Receipt-to-intake lag: fax receipt to case creation</td><td>Median under 1 hr; 95th percentile under 4 hrs</td></tr>
+        <tr><td>Queue aging: unprocessed faxes older than 2, 4 or 8 hrs</td><td>Zero expedited faxes over 2 hrs</td></tr>
+        <tr><td>Misclassification: expedited triaged as standard, or the reverse</td><td>Under 2%</td></tr>
+        <tr><td>Intake-to-clinical-review time</td><td>Median under 24 hrs (standard)</td></tr>
+        <tr><td>Pend rate for missing clinical information</td><td>Down 30%</td></tr>
+        <tr><td>Backlog recovery time after a surge (Mondays, after holidays)</td><td>—</td></tr>
+        <tr><td rowspan="4">3. Guardrails (don't trade accuracy for speed)</td><td>Accuracy of auto-extracted fields (member ID, procedure codes, diagnosis, provider)</td><td>95% or higher</td></tr>
+        <tr><td>Duplicate case rate, since providers re-fax when they don't hear back</td><td>—</td></tr>
+        <tr><td>Overturn rate on appeal, so faster decisions aren't worse decisions</td><td>—</td></tr>
+        <tr><td>Lost or unmatched faxes</td><td>—</td></tr>
+        <tr><td rowspan="4">4. Efficiency and adoption</td><td>Manual touches per request</td><td>—</td></tr>
+        <tr><td>Staff hours on fax sorting and data entry, freed for clinical review</td><td>—</td></tr>
+        <tr><td>Share of requests arriving by portal or API instead of fax</td><td>—</td></tr>
+        <tr><td>Provider resubmission rate (re-faxing or calling for status)</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Where this leads</h2>
+  <p>Automatic extraction and structured portal data are also what an AI-assisted review would build on. That's the next piece of work: <a href="ai-clinical-review.html">AI-assisted clinical review</a>.</p>
+</main>
+<footer class="site-footer">
+  <p><a href="index.html">Asia Le, RN</a> · <a href="mailto:asiaqle@gmail.com">asiaqle@gmail.com</a></p>
+  <p>Described at a process level. No member or patient information appears on this site.</p>
+</footer>
+</body>
+</html>
