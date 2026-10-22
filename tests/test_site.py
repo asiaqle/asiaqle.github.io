@@ -361,7 +361,13 @@ class SiteTests(unittest.TestCase):
                  ("on-harbor on harbor", lt.get("--on-harbor"), lt.get("--harbor")),
                  ("dark text on bg", dk.get("--text"), dk.get("--bg")),
                  ("dark text-2 on bg", dk.get("--text-2"), dk.get("--bg")),
-                 ("dark accent on bg", dk.get("--accent"), dk.get("--bg"))]
+                 ("dark accent on bg", dk.get("--accent"), dk.get("--bg")),
+                 ("light text-2 on bg", lt.get("--text-2"), lt.get("--bg")),
+                 ("light accent on bg", lt.get("--accent"), lt.get("--bg")),
+                 ("light shipped pill", lt.get("--bg"), lt.get("--accent")),
+                 ("dark shipped pill", dk.get("--bg"), dk.get("--accent")),
+                 ("light band-muted on band", lt.get("--band-muted"), lt.get("--band")),
+                 ("dark band-muted on band", dk.get("--band-muted"), dk.get("--band"))]
         for label, fg, bg in pairs:
             with self.subTest(pair=label):
                 self.assertTrue(fg and bg, "token missing")
@@ -432,6 +438,41 @@ class SiteTests(unittest.TestCase):
             html = (ROOT / page).read_text(encoding="utf-8")
             with self.subTest(page=page):
                 self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 1)
+
+    def test_ai_diagram_keeps_nurse_judgment(self):
+        svg = self._diagrams((ROOT / "ai-clinical-review.html").read_text(encoding="utf-8"))[0]
+        texts = " ".join(re.findall(r"<text[^>]*>([^<]+)<", svg))
+        self.assertNotIn("MODEL DRAFTS", texts)
+        for phrase in ("Decides whether", "Confirms the", "Edits, signs off"):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, texts)
+        self.assertIn("rules-based automation", re.search(r'aria-label="([^"]*)"', svg).group(1))
+
+    def test_expedited_label_has_no_added_cause(self):
+        svg = self._diagrams((ROOT / "expedited-loophole.html").read_text(encoding="utf-8"))[0]
+        self.assertNotIn("feeds back", svg)
+
+    def test_footer_focus_ring_visible(self):
+        css = (ROOT / "styles.css").read_text(encoding="utf-8")
+        self.assertRegex(css, r"\.site-footer a:focus-visible[^{]*\{[^}]*outline-color:\s*var\(--band-text\)")
+
+    def test_flower_colors_in_style_not_attributes(self):
+        svg = (ROOT / "assets" / "flower.svg").read_text(encoding="utf-8")
+        self.assertNotRegex(svg, r'(fill|stroke)="var\(')
+
+    def test_hero_italic(self):
+        self.assertRegex((ROOT / "index.html").read_text(encoding="utf-8"), r"<em>I fix the workflows\.</em>")
+
+    def test_branch_labels_readable(self):
+        css = (ROOT / "styles.css").read_text(encoding="utf-8")
+        size = re.search(r"\.diagram \.lbl\s*\{[^}]*font-size:\s*(\d+)px", css)
+        self.assertIsNotNone(size)
+        self.assertGreaterEqual(int(size.group(1)), 12)
+
+    def test_markers_use_plain_auto(self):
+        for page in INNER_PAGES:
+            with self.subTest(page=page):
+                self.assertNotIn("auto-start-reverse", (ROOT / page).read_text(encoding="utf-8"))
 
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"

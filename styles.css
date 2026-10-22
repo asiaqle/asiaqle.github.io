@@ -63,6 +63,7 @@ body {
 a { color: var(--accent); text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.site-footer a:focus-visible, .band a:focus-visible { outline-color: var(--band-text); }
 
 .wrap { max-width: 64rem; margin: 0 auto; padding: 0 20px; }
 .narrow { max-width: 42rem; }
@@ -201,7 +202,7 @@ main { overflow-x: clip; }
 .diagram .dot { fill: currentColor; }
 .diagram .box { fill: var(--pill-fill); stroke: currentColor; stroke-width: 1; }
 .diagram text { font-family: var(--sans); font-size: 13px; fill: var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 5px; stroke-linejoin: round; }
-.diagram .lbl { font-size: 11px; letter-spacing: 0.08em; fill: var(--text-2); }
+.diagram .lbl { font-size: 12px; letter-spacing: 0.08em; fill: var(--text-2); }
 .diagram-narrow { display: none; }
 @media (max-width: 600px) {
   .diagram-wide { display: none; }
