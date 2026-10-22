@@ -377,7 +377,18 @@ class SiteTests(unittest.TestCase):
         for page, info in self.pages.items():
             fonts = [h for h in info.stylesheets if h.startswith("https://fonts.googleapis.com/")]
             with self.subTest(page=page):
-                self.assertTrue(any("Fraunces" in h and "Inter" in h for h in fonts))
+                self.assertTrue(any(all(f in h for f in ("Playfair+Display", "Archivo", "Public+Sans")) for h in fonts))
+                self.assertFalse(any("Fraunces" in h for h in fonts))
+
+    def test_font_roles(self):
+        css = (ROOT / "styles.css").read_text(encoding="utf-8")
+        self.assertRegex(css, r'--serif:\s*"Playfair Display"')
+        self.assertRegex(css, r'--sans:\s*"Public Sans"')
+        self.assertRegex(css, r'--label:\s*"Archivo"')
+        meta = re.search(r"\.meta, \.eyebrow, \.case-num\s*\{([^}]*)\}", css)
+        self.assertIsNotNone(meta)
+        self.assertIn("var(--label)", meta.group(1))
+        self.assertRegex(meta.group(1), r"font-stretch:\s*125%")
 
     def test_topbar(self):
         for page in PAGES:
