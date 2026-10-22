@@ -36,7 +36,10 @@ REQUIRED_TEXT = {
     "prior-auth-intake.html": [
         "late", "fax", "portal", "wrong member", "receipt-to-intake lag", "overturn rate", "CMS",
     ],
-    "ai-clinical-review.html": ["in progress", "nurse"],
+    "ai-clinical-review.html": [
+        "concept", "nurse", "medical director", "NCD", "LCD", "MCG", "overturn rate", "never denies",
+        "Shadow mode", "isn't built",
+    ],
 }
 
 FORBIDDEN_TEXT = [
@@ -52,7 +55,7 @@ STATUS = {
     "expedited-loophole.html": "Shipped",
     "port-troubleshooting.html": "Proposal",
     "prior-auth-intake.html": "Recommendation",
-    "ai-clinical-review.html": "Concept · in progress",
+    "ai-clinical-review.html": "Concept",
 }
 
 

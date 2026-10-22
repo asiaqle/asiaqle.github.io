@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI-assisted clinical review · Asia Le</title>
-  <meta name="description" content="A product concept in progress: where AI can help with utilization management review and where a nurse must still decide.">
+  <meta name="description" content="A product concept for AI-assisted utilization management review: what a model drafts, where a nurse decides, how it fails, and how to measure it.">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="AI-assisted clinical review (in progress)">
-  <meta property="og:description" content="Where a model can draft and where a nurse must decide. A product concept built on real utilization management workflows.">
+  <meta property="og:title" content="AI-assisted clinical review (concept)">
+  <meta property="og:description" content="Where a model can draft and where a nurse must decide. A product concept built on a real utilization management workflow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
@@ -16,20 +16,103 @@
 <body>
 <main class="wrap">
   <a class="back-link" href="index.html">← All work</a>
-  <div class="meta-row"><span class="status status--concept">Concept · in progress</span></div>
+  <div class="meta-row"><span class="status status--concept">Concept</span></div>
   <h1>AI-assisted clinical review</h1>
-  <p class="lede">I'm working on a product concept for AI-assisted utilization management review, built on the workflows in my <a href="oon-decision-tree.html">out-of-network decision path</a> and my <a href="prior-auth-intake.html">prior auth intake recommendation</a>. This page is in progress and will be updated when the concept is ready.</p>
+  <p class="lede">A product concept for utilization management review: what a model could prepare before a nurse opens a case, where the nurse still has to decide, how it could go wrong, and how to measure it. It builds on my <a href="oon-decision-tree.html">out-of-network decision path</a> and my <a href="prior-auth-intake.html">prior auth intake recommendation</a>. This is a concept. It isn't built or piloted.</p>
 
-  <h2>What it will cover</h2>
-  <ul>
-    <li><strong>What a model drafts.</strong> Which parts of a review, such as network status lookups, distance checks and pulling the relevant documentation, could be prepared before a nurse opens the case.</li>
-    <li><strong>Where a nurse must decide.</strong> Which determinations need clinical judgment and a human sign-off, and how the tool makes that clear.</li>
-    <li><strong>How it fails.</strong> The ways a model could get a review wrong, and how the workflow catches them.</li>
-    <li><strong>How to measure it.</strong> Accuracy, turnaround and safety, including overturn rates on appeal.</li>
-  </ul>
+  <h2>The review today</h2>
+  <p>I review Medicare Advantage and D-SNP prior authorization requests against coverage guidelines every day. A typical review looks like this:</p>
+  <ol>
+    <li><strong>Triage.</strong> Accept the authorization in my work queue, export the queue to a spreadsheet, and work the cases due today, the overdue ones and Part B requests first.</li>
+    <li><strong>Administrative checks.</strong> Member eligibility, the provider's participating status, the member's authorization history, and the request itself: procedure codes, units and dates of service. Out-of-network requests add the checks from my <a href="oon-decision-tree.html">decision path</a>, like network status and driving distance to an in-network provider.</li>
+    <li><strong>Clinical completeness.</strong> Is the clinical documentation complete enough to review?</li>
+    <li><strong>Criteria match.</strong> Search the MCG module by keyword or procedure code to find the guideline that applies, then work through its criteria checklist to reach a coverage determination.</li>
+    <li><strong>Documentation.</strong> I write my clinical review note the whole way through.</li>
+    <li><strong>Close-out.</strong> Post the note, set the decision, generate the approval letter, and send it to the coordinators to fax and close the authorization.</li>
+  </ol>
+  <p>Most of the time goes to looking things up and reading. The judgment is in steps 3 and 4.</p>
+
+  <h2>What the model drafts, what the nurse decides</h2>
+  <p>The model prepares the case. The nurse makes every decision.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Step</th><th scope="col">Prepared before the nurse opens the case</th><th scope="col">The nurse</th></tr></thead>
+      <tbody>
+        <tr><td>Triage</td><td>A ranked queue by due date and priority. Specialty requests (chemotherapy, radiation therapy, organ transplants, spinal surgery) are flagged up front for the contracted specialty reviewer.</td><td>Confirms routing and works the queue</td></tr>
+        <tr><td>Administrative checks</td><td>Eligibility, participating status, authorization history and request details, pre-filled. For out-of-network requests: network status and distance to the nearest in-network provider. This part is rules-based automation, not AI.</td><td>Spot-checks against the request</td></tr>
+        <tr><td>Clinical completeness</td><td>A list of what's missing, a drafted fax request and phone script, and a clock tracking the two outreach attempts (at least 4 hours apart) against the due date.</td><td>Decides whether the clinicals are complete and sends the requests</td></tr>
+        <tr><td>Criteria match</td><td>A suggested guideline, with the hierarchy shown step by step. Each criterion is marked met or not found, and linked to the page or quote in the record it came from.</td><td>Confirms the guideline, then marks the checklist</td></tr>
+        <tr><td>Documentation</td><td>A draft clinical review note built from the cited evidence.</td><td>Edits, signs off and posts the decision</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who can say no</h2>
+  <p>In utilization management, a nurse reviewer can approve a request that meets criteria but cannot deny one. Requests that don't meet criteria go to our internal medical directors, and specialty requests go to a contracted review company. When clinicals are still missing after both outreach attempts on the due date, the case goes to a medical director too. The medical director makes the final determination on any denial.</p>
+  <div class="callout"><p>The model never denies. Its strongest output is "criteria appear met, here's the evidence," and a nurse confirms that. Anything else gets routed to a medical director or specialty reviewer with a summary attached. A model mistake can slow a case down. It can't deny care.</p></div>
+
+  <h2>How it fails, and how the workflow catches it</h2>
+  <p>The first two failures are ones I've seen in nurse reviews today. The rest are risks a model adds.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Failure</th><th scope="col">How the workflow catches it</th></tr></thead>
+      <tbody>
+        <tr><td>Missing something buried in the clinicals</td><td>Every criterion links to its evidence. A criterion with no evidence shows as "not found," never as "met," so the gap stays visible.</td></tr>
+        <tr><td>Using the wrong guideline in the hierarchy</td><td>The model works the hierarchy in order: NCD (national coverage), then LCD (local coverage), then MCG, then company policy and the member's evidence of coverage. It shows where it stopped and why, and the nurse confirms the guideline before seeing the checklist.</td></tr>
+        <tr><td>Made-up evidence</td><td>A citation has to open to the real text in the record. If it doesn't, the claim isn't shown.</td></tr>
+        <tr><td>Rubber-stamping</td><td>The nurse marks the checklist independently, and the tool compares those answers with the model's. Agreement rates are audited; a reviewer who agrees 100% of the time gets a second look.</td></tr>
+        <tr><td>Wrong member or wrong document</td><td>Name, date of birth and member ID on the clinicals are matched to the authorization, and any mismatch is flagged before review.</td></tr>
+        <tr><td>Outdated guideline</td><td>The guideline version and effective date are shown and checked against the date of service.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>The trust test</h2>
+  <p>As a reviewer, this is what would make me rely on a draft, and missing any of it would make me stop:</p>
+  <ol>
+    <li>Everything in the draft matches the authorization request when I double-check it.</li>
+    <li>The information is accurate and pertinent to the case.</li>
+    <li>Another reviewer reading it understands clearly and concisely why the decision was made.</li>
+    <li>The guideline hierarchy and CMS regulations are followed.</li>
+  </ol>
+  <p>These are the acceptance criteria. Each one maps to a measure below.</p>
+
+  <h2>How I'd measure it</h2>
+  <p>The same four-tier pattern as my <a href="prior-auth-intake.html">intake recommendation</a>: speed measures paired with guardrails like overturn rate on appeal, so faster reviews can't come at the cost of worse ones. Accuracy is checked by sampling and auditing cases, not by trusting the model's own claims. There's no baseline yet, so no targets are set.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Tier</th><th scope="col">Measure</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3">1. Did it help?</td><td>Turnaround from accepting the authorization to the decision</td></tr>
+        <tr><td>Share of cases decided on or before the due date</td></tr>
+        <tr><td>Cases completed per reviewer per day</td></tr>
+        <tr><td rowspan="4">2. Accuracy (sampled audit)</td><td>Guideline chosen matches the nurse's final guideline</td></tr>
+        <tr><td>Agreement between model and nurse on each criterion</td></tr>
+        <tr><td>Missing-clinicals flags that were correct</td></tr>
+        <tr><td>Citations that open to the real text (should be all of them)</td></tr>
+        <tr><td rowspan="6">3. Safety guardrails</td><td>Overturn rate on appeal</td></tr>
+        <tr><td>Medical director reversals of drafted approvals</td></tr>
+        <tr><td>Approvals later found in audit not to meet criteria</td></tr>
+        <tr><td>Member or document mismatches that got through</td></tr>
+        <tr><td>CMS timeliness compliance</td></tr>
+        <tr><td>Reviewer agreement rate, watched for rubber-stamping</td></tr>
+        <tr><td rowspan="3">4. Adoption</td><td>Share of the draft note kept vs. rewritten</td></tr>
+        <tr><td>Time spent on each step</td></tr>
+        <tr><td>Reviewer trust, surveyed against the trust test</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How I'd roll it out</h2>
+  <ol>
+    <li><strong>Shadow mode.</strong> The model drafts in the background while nurses review as usual. Compare its drafts with their decisions.</li>
+    <li><strong>A small group of reviewers sees the drafts.</strong> Track the guardrails and the trust test closely.</li>
+    <li><strong>Expand only if the guardrails hold.</strong> If overturns, reversals or mismatches rise, stop and fix before going further.</li>
+  </ol>
 </main>
 <footer class="site-footer">
   <p><a href="index.html">Asia Le, RN</a> · <a href="mailto:asiaqle@gmail.com">asiaqle@gmail.com</a></p>
+  <p>Described at a process level. No member or patient information appears on this site.</p>
 </footer>
 </body>
 </html>
