@@ -408,7 +408,7 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(html.count('class="band"'), 1)
         band = re.search(r'class="band"[^>]*>(.*?)</section>', html, re.S).group(1)
         self.assertEqual(len(re.findall(r'class="stat"', band)), 4)
-        self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 2)
+        self.assertLessEqual(len(re.findall(r'class="bloom"', html)), 3)
         self.assertEqual(re.findall(r'class="sec-num"[^>]*>([^<]+)<', html), ["001", "002", "003", "004"])
 
     @staticmethod
@@ -484,6 +484,35 @@ class SiteTests(unittest.TestCase):
         for page in INNER_PAGES:
             with self.subTest(page=page):
                 self.assertNotIn("auto-start-reverse", (ROOT / page).read_text(encoding="utf-8"))
+
+    def test_about_structure(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        about = re.search(r'<section aria-labelledby="about">(.*?)</section>', html, re.S)
+        self.assertIsNotNone(about)
+        a = about.group(1)
+        self.assertEqual(len(re.findall(r"<img\b", a)), 1)
+        self.assertIn('alt="Asia standing on a wooden dock in front of a lake and a forested mountain"', a)
+        self.assertEqual(len(re.findall(r'class="bloom"', a)), 1)
+        self.assertIn("Lake Crescent, WA · Photo by Asia", a)
+        self.assertIn("— Asia Le, BSN, RN", a)
+        facts = re.search(r'<ul class="about-facts">(.*?)</ul>', a, re.S)
+        self.assertIsNotNone(facts)
+        for f in ("4×", "2020", "NYU degrees", "ABCD Award", "Published"):
+            with self.subTest(fact=f):
+                self.assertIn(f, facts.group(1))
+
+    def test_about_image_size(self):
+        img = ROOT / "assets" / "about.jpg"
+        self.assertTrue(img.is_file())
+        self.assertLessEqual(img.stat().st_size, 200 * 1024)
+        out = subprocess.run(["sips", "-g", "pixelWidth", str(img)], capture_output=True, text=True, check=True).stdout
+        self.assertLessEqual(int(re.search(r"pixelWidth:\s*(\d+)", out).group(1)), 900)
+
+    def test_about_image_has_no_gps(self):
+        img = ROOT / "assets" / "about.jpg"
+        self.assertNotIn(b"GPS", img.read_bytes()[:65536])
+        out = subprocess.run(["mdls", "-name", "kMDItemLatitude", str(img)], capture_output=True, text=True).stdout
+        self.assertIn("(null)", out)
 
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"

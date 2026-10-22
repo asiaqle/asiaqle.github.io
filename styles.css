@@ -272,3 +272,49 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
 @media (min-width: 780px) {
   .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* About section (ASMobbin-style card) */
+.about { display: grid; grid-template-columns: 1fr; gap: 36px; margin-top: 8px; }
+.about-card {
+  position: relative;
+  margin: 0;
+  max-width: 260px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+}
+.about-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 80%;
+  border-radius: 4px;
+}
+.about-card .bloom { position: absolute; top: -26px; right: -26px; width: 92px; opacity: 0.6; color: var(--bloom); --vein: var(--bloom-vein); }
+.about-card figcaption { margin: 10px 2px 0; font-size: 9px; letter-spacing: 0.14em; line-height: 1.5; text-wrap: balance; }
+.tick { position: absolute; width: 9px; height: 9px; border-color: var(--text-2); border-style: solid; border-width: 0; opacity: 0.7; }
+.tick--tl { top: 6px; left: 6px; border-top-width: 1px; border-left-width: 1px; }
+.tick--tr { top: 6px; right: 6px; border-top-width: 1px; border-right-width: 1px; }
+.tick--bl { bottom: 6px; left: 6px; border-bottom-width: 1px; border-left-width: 1px; }
+.tick--br { bottom: 6px; right: 6px; border-bottom-width: 1px; border-right-width: 1px; }
+.about-body > .meta:first-child { margin-bottom: 14px; }
+.about-facts {
+  list-style: none;
+  padding: 16px 0 0;
+  margin: 8px 0 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 36px;
+}
+.about-facts li { margin: 0; }
+.about-facts .stat-num { font-size: 2rem; color: var(--text); }
+.about-facts .meta { display: block; margin-top: 6px; }
+.about-small { font-size: 15px; color: var(--text-2); }
+@media (min-width: 780px) {
+  .about { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; align-items: start; }
+  .about-card { max-width: none; }
+  .about-card .bloom { width: 120px; top: -34px; right: -34px; }
+}
