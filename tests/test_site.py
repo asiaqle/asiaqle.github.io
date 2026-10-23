@@ -503,7 +503,10 @@ class SiteTests(unittest.TestCase):
         self.assertIn('alt="Asia standing on a wooden dock in front of a lake and a forested mountain"', a)
         self.assertEqual(len(re.findall(r'class="bloom"', a)), 1)
         self.assertIn("Lake Crescent, WA · Photo by Asia", a)
-        self.assertIn("— Asia Le, BSN, RN", a)
+        self.assertIn(">Asia Le, BSN, RN<", a)
+        for detail in ("MSN in Nursing Education", "Doodle", "yes, that's really his name", "pressure cooker"):
+            with self.subTest(detail=detail):
+                self.assertIn(detail, a)
         facts = re.search(r'<ul class="about-facts">(.*?)</ul>', a, re.S)
         self.assertIsNotNone(facts)
         for f in ("4×", "2020", "NYU degrees", "ABCD Award", "Published"):
@@ -516,9 +519,7 @@ class SiteTests(unittest.TestCase):
         for name in ("VNS", "Northwell", "Long Island Jewish"):
             with self.subTest(name=name):
                 self.assertNotIn(name, about)
-        for desc in ("New York health plan", "managed care organization", "inpatient hospital"):
-            with self.subTest(desc=desc):
-                self.assertIn(desc, about)
+        self.assertIn("New York health plan", about)
 
     def test_about_image_size(self):
         img = ROOT / "assets" / "about.jpg"
