@@ -19,7 +19,7 @@ PAGES = [
 
 REQUIRED_TEXT = {
     "index.html": [
-        "Asia Le", "I'm a nurse with experience in oncology and utilization management", "I want to move into product management", "30%", "fewer review delays", "person rollout",
+        "Asia Le", "I'm a nurse with experience in oncology and utilization management", "I want to move into product management", "30%", "fewer review delays", "reviewers using the new decision tree",
         "50%", "faster record retrieval", "CMS", "asiaqle@gmail.com", "linkedin.com/in/asiaqle",
         "Sunrise EHR", "eClinicalWorks",
     ],
@@ -47,7 +47,7 @@ FORBIDDEN_TEXT = [
     "80-person team", "100% reduction", "100% fewer",
     "already past their deadline", "has already passed", "clearer and smaller",
     "biggest declines", "not a knowledge gap",
-    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
+    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "Getting 50 reviewers to one decision path", "Closing the expedited loophole", "The port nobody taught them to fix", "Fixing prior auth intake at the source", "person rollout", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
     "didn't always agree", "databases that didn't agree",
 ]
 
@@ -82,6 +82,14 @@ def _words(text):
 
 
 DIAGRAM_WHITELIST = set().union(*(_words(label) for label in APPROVED_DIAGRAM_LABELS))
+
+CASE_TITLES = {
+    "oon-decision-tree.html": "A decision tree for out-of-network reviews",
+    "expedited-loophole.html": "Fixing a workaround in expedited reviews",
+    "port-troubleshooting.html": "Teaching new nurses to troubleshoot implanted ports",
+    "prior-auth-intake.html": "Moving prior authorization requests off fax",
+    "ai-clinical-review.html": "AI-assisted clinical review",
+}
 
 STATUS = {
     "oon-decision-tree.html": "Shipped",
@@ -524,6 +532,15 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn(b"GPS", img.read_bytes()[:65536])
         out = subprocess.run(["mdls", "-name", "kMDItemLatitude", str(img)], capture_output=True, text=True).stdout
         self.assertIn("(null)", out)
+
+    def test_case_titles_match_homepage(self):
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        for page, title in CASE_TITLES.items():
+            html = (ROOT / page).read_text(encoding="utf-8")
+            with self.subTest(page=page):
+                self.assertIn(f'<span class="case-title">{title}</span>', home)
+                self.assertRegex(html, r"<h1>" + re.escape(title) + r"</h1>")
+                self.assertIn(f"<title>{title} · Asia Le</title>", html)
 
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"
