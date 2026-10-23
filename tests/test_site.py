@@ -24,7 +24,7 @@ REQUIRED_TEXT = {
         "Sunrise EHR", "eClinicalWorks", "Other work", "EMR lead for a CMS audit", "Initiative Award",
     ],
     "oon-decision-tree.html": [
-        "50 reviewers in our 80-person department", "30%", "100%", "compliance on expedited and Part B requests", "Part B",
+        "50 reviewers in our 80-person department", "30%", "100%", "compliance on expedited and Part B requests", "send the case to a medical director", "Part B",
         "training", "compliance", "authorization", "three months",
     ],
     "expedited-loophole.html": [
@@ -47,7 +47,7 @@ FORBIDDEN_TEXT = [
     "80-person team", "100% reduction", "100% fewer",
     "already past their deadline", "has already passed", "clearer and smaller",
     "biggest declines", "not a knowledge gap",
-    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "Getting 50 reviewers to one decision path", "Closing the expedited loophole", "The port nobody taught them to fix", "Fixing prior auth intake at the source", "person rollout", "Chosen by senior leadership", "Also shipped", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
+    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "Getting 50 reviewers to one decision path", "Closing the expedited loophole", "The port nobody taught them to fix", "Fixing prior auth intake at the source", "person rollout", "deny the request", "Chosen by senior leadership", "Also shipped", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
     "didn't always agree", "databases that didn't agree",
 ]
 
