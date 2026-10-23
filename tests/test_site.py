@@ -47,7 +47,7 @@ FORBIDDEN_TEXT = [
     "80-person team", "100% reduction", "100% fewer",
     "already past their deadline", "has already passed", "clearer and smaller",
     "biggest declines", "not a knowledge gap",
-    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "Getting 50 reviewers to one decision path", "Closing the expedited loophole", "The port nobody taught them to fix", "Fixing prior auth intake at the source", "person rollout", "deny the request", "pushed back", "Chosen by senior leadership", "Also shipped", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
+    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "Getting 50 reviewers to one decision path", "Closing the expedited loophole", "The port nobody taught them to fix", "Fixing prior auth intake at the source", "person rollout", "deny the request", "pushed back", "incentive problem", "rewarded the wrong thing", "Chosen by senior leadership", "Also shipped", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
     "didn't always agree", "databases that didn't agree",
 ]
 
@@ -70,6 +70,7 @@ APPROVED_DIAGRAM_LABELS = [
     "Network status", "Line of business", "Enrollment date", "Within 90 days?", "Established patient?",
     "Continuity of care", "In-network within 30 mi?", "Decision", "YES", "NO",
     "Same-day decision avoids the letter", "Providers learn “expedited” = fast",
+    "Request doesn't qualify as expedited", "Decided the same day (simplest path)",
     "Routine requests marked expedited", "Reviewers overloaded",
     "Current state", "The gap", "Desired state", "Senior nurses", "Check-off checklist", "New nurses",
     "Escalation policy", "Did we fix it?", "Leading indicators", "Guardrails", "Efficiency and adoption",
@@ -542,6 +543,16 @@ class SiteTests(unittest.TestCase):
                 self.assertIn(f'<span class="case-title">{title}</span>', home)
                 self.assertRegex(html, r"<h1>" + re.escape(title) + r"</h1>")
                 self.assertIn(f"<title>{title} · Asia Le</title>", html)
+
+    def test_expedited_diagram_in_why_section(self):
+        html = (ROOT / "expedited-loophole.html").read_text(encoding="utf-8")
+        sec = re.search(r"<h2>Why it was happening</h2>(.*?)<h2>", html, re.S)
+        self.assertIsNotNone(sec)
+        self.assertIn('class="diagram"', sec.group(1))
+        for label in ("Request doesn't qualify as expedited", "Decided the same day (simplest path)"):
+            with self.subTest(label=label):
+                self.assertIn(label, sec.group(1))
+        self.assertNotIn("avoids the letter", html)
 
     def test_flower_asset_has_symbol(self):
         svg = ROOT / "assets" / "flower.svg"

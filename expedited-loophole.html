@@ -29,27 +29,27 @@
     <li class="tile"><span class="tile-num">3</span><span class="tile-label">groups involved: reviewers, providers, and the contact center</span></li>
   </ul>
 
-<figure class="diagram-wrap">
-<svg class="diagram" viewBox="0 0 360 250" role="img" aria-label="A loop: deciding the same day avoids the letter, so providers learn that marking a request expedited is fast, so routine requests get marked expedited, so reviewers are overloaded, and the loop repeats."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
-
-<path class="ln" d="M60 40 V 220"/>
-<path class="ln dash" d="M54 222 C 18 214 18 48 50 40" marker-end="url(#arw)"/>
-<circle class="node" cx="60" cy="40" r="6"/><circle class="node" cx="60" cy="100" r="6"/>
-<circle class="node" cx="60" cy="160" r="6"/><circle class="node" cx="60" cy="220" r="6"/>
-<text x="78" y="45">Same-day decision avoids the letter</text>
-<text x="78" y="105">Providers learn “expedited” = fast</text>
-<text x="78" y="165">Routine requests marked expedited</text>
-<text x="78" y="225">Reviewers overloaded</text>
-</svg>
-</figure>
 
   <h2>The problem</h2>
   <p>We started seeing an influx of expedited requests. Because expedited cases have a much shorter deadline (72 hours instead of 7 days), the extra volume kept reviewers from getting to the authorizations that were due that day. As a result, we started having timeliness issues, and the team felt distressed.</p>
 
-  <h2>The root cause: a workaround that rewarded the wrong thing</h2>
-  <p>The official workflow said that when a request didn't qualify for expedited review, the reviewer should run the expedited script and send the provider a letter denying expedited review. To avoid writing that letter while staying CMS compliant, reviewers had started deciding these cases the same day instead.</p>
-  <p>Providers noticed. Marking a request "expedited" got it decided immediately, even when it was nothing like life-threatening: colonoscopies, cataract surgery, physical therapy. The workaround rewarded exactly the behavior that was overloading reviewers.</p>
-  <div class="callout"><p>The volume wasn't really a staffing problem. It was an incentive problem, and our own workaround had created it.</p></div>
+  <h2>Why it was happening</h2>
+  <p>When a request doesn't qualify as expedited, our workflow had two compliant options. The reviewer could run the expedited script and send the provider a letter explaining that the request wouldn't be reviewed as expedited, or the case could be decided the same day. Deciding it the same day was the simplest path, and over time it created a loop:</p>
+<figure class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 360 310" role="img" aria-label="A loop. A request doesn't qualify as expedited. Deciding it the same day is the simplest compliant path. Providers learn that marking a request expedited leads to a faster decision. More routine requests get marked expedited, and each one is another request that doesn't qualify, so the loop repeats. The result is that reviewers become overloaded."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
+<path class="ln" d="M60 40 V 220"/><path class="ln" d="M60 226 V 272" marker-end="url(#arw)"/>
+<path class="ln dash" d="M54 222 C 16 212 16 50 50 40" marker-end="url(#arw)"/>
+<circle class="node" cx="60" cy="40" r="6"/><circle class="node" cx="60" cy="100" r="9"/><circle class="dot" cx="60" cy="100" r="3"/>
+<circle class="node" cx="60" cy="160" r="6"/><circle class="node" cx="60" cy="220" r="6"/><circle class="node" cx="60" cy="280" r="6"/>
+<text x="78" y="45">Request doesn't qualify as expedited</text>
+<text x="78" y="105">Decided the same day (simplest path)</text>
+<text x="78" y="165">Providers learn “expedited” = fast</text>
+<text x="78" y="225">Routine requests marked expedited</text>
+<text x="78" y="285">Reviewers overloaded</text>
+</svg>
+</figure>
+  <p>Many of the requests that came in this way were for services that weren't urgent, like colonoscopies, cataract surgery, and physical therapy.</p>
+  <div class="callout"><p>Because the issue came from how the workflow was set up, changing the workflow was the most direct way to fix it.</p></div>
 
   <h2>What we shipped</h2>
   <p>We changed things for everyone involved, all at once, so the loophole closed from every direction.</p>
