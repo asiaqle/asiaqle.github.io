@@ -504,7 +504,7 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r'class="bloom"', a)), 1)
         self.assertIn("Lake Crescent, WA · Photo by Asia", a)
         self.assertIn(">Asia Le, BSN, RN<", a)
-        for detail in ("MSN in Nursing Education", "Doodle", "Cat, my tabby (revolutionary name)", "pressure cooker"):
+        for detail in ("MSN in Nursing Education", "Doodle", "Cat, my tabby, and Doodle", "pressure cooker"):
             with self.subTest(detail=detail):
                 self.assertIn(detail, a)
         facts = re.search(r'<ul class="about-facts">(.*?)</ul>', a, re.S)
