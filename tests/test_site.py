@@ -71,6 +71,7 @@ APPROVED_DIAGRAM_LABELS = [
     "Continuity of care", "In-network within 30 mi?", "Decision", "YES", "NO",
     "Same-day decision avoids the letter", "Providers learn “expedited” = fast",
     "Request doesn't qualify as expedited", "Decided the same day (simplest path)",
+    "Each loop adds more expedited requests, and reviewers fall behind on cases due that day.",
     "Routine requests marked expedited", "Reviewers overloaded",
     "Current state", "The gap", "Desired state", "Senior nurses", "Check-off checklist", "New nurses",
     "Escalation policy", "Did we fix it?", "Leading indicators", "Guardrails", "Efficiency and adoption",
@@ -549,7 +550,7 @@ class SiteTests(unittest.TestCase):
         sec = re.search(r"<h2>Why it was happening</h2>(.*?)<h2>", html, re.S)
         self.assertIsNotNone(sec)
         self.assertIn('class="diagram"', sec.group(1))
-        for label in ("Request doesn't qualify as expedited", "Decided the same day (simplest path)"):
+        for label in ("Routine request", "marked expedited", "Doesn't qualify", "Decided the same day", "(simplest compliant path)", "Providers learn", "it's faster"):
             with self.subTest(label=label):
                 self.assertIn(label, sec.group(1))
         self.assertNotIn("avoids the letter", html)

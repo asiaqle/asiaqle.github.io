@@ -36,16 +36,22 @@
   <h2>Why it was happening</h2>
   <p>When a request doesn't qualify as expedited, our workflow had two compliant options. The reviewer could run the expedited script and send the provider a letter explaining that the request wouldn't be reviewed as expedited, or the case could be decided the same day. Deciding it the same day was the simplest path, and over time it created a loop:</p>
 <figure class="diagram-wrap">
-<svg class="diagram" viewBox="0 0 360 310" role="img" aria-label="A loop. A request doesn't qualify as expedited. Deciding it the same day is the simplest compliant path. Providers learn that marking a request expedited leads to a faster decision. More routine requests get marked expedited, and each one is another request that doesn't qualify, so the loop repeats. The result is that reviewers become overloaded."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
-<path class="ln" d="M60 40 V 220"/><path class="ln" d="M60 226 V 272" marker-end="url(#arw)"/>
-<path class="ln dash" d="M54 222 C 16 212 16 50 50 40" marker-end="url(#arw)"/>
-<circle class="node" cx="60" cy="40" r="6"/><circle class="node" cx="60" cy="100" r="9"/><circle class="dot" cx="60" cy="100" r="3"/>
-<circle class="node" cx="60" cy="160" r="6"/><circle class="node" cx="60" cy="220" r="6"/><circle class="node" cx="60" cy="280" r="6"/>
-<text x="78" y="45">Request doesn't qualify as expedited</text>
-<text x="78" y="105">Decided the same day (simplest path)</text>
-<text x="78" y="165">Providers learn “expedited” = fast</text>
-<text x="78" y="225">Routine requests marked expedited</text>
-<text x="78" y="285">Reviewers overloaded</text>
+<svg class="diagram" viewBox="0 0 360 340" role="img" aria-label="A loop with four steps. A provider marks a routine request as expedited. The request doesn't qualify as expedited. It is decided the same day, the simplest compliant path. Providers learn that marking requests expedited is faster, so they mark the next routine request as expedited, and the loop repeats. Each loop adds more expedited requests, and reviewers fall behind on cases due that day."><defs><marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8z" class="dot"/></marker></defs>
+<rect class="box" x="100" y="16" width="160" height="48" rx="24"/>
+<text x="180" y="36" text-anchor="middle">Routine request</text><text x="180" y="53" text-anchor="middle">marked expedited</text>
+<rect class="box" x="205" y="122" width="145" height="48" rx="24"/>
+<text x="277" y="142" text-anchor="middle">Doesn't qualify</text><text x="277" y="159" text-anchor="middle">as expedited</text>
+<rect class="box" x="70" y="228" width="220" height="48" rx="24"/>
+<text x="180" y="248" text-anchor="middle">Decided the same day</text><text x="180" y="265" text-anchor="middle">(simplest compliant path)</text>
+<rect class="box" x="10" y="122" width="145" height="48" rx="24"/>
+<text x="82" y="142" text-anchor="middle">Providers learn</text><text x="82" y="159" text-anchor="middle">it's faster</text>
+<path class="ln" d="M262 40 C 300 44 300 90 290 118" marker-end="url(#arw)"/>
+<path class="ln" d="M290 174 C 298 205 285 222 268 226" marker-end="url(#arw)"/>
+<path class="ln" d="M90 226 C 74 222 62 205 70 174" marker-end="url(#arw)"/>
+<path class="ln" d="M70 118 C 60 88 64 44 96 40" marker-end="url(#arw)"/>
+<text class="lbl" x="180" y="152" text-anchor="middle">LOOP</text>
+<text x="180" y="308" text-anchor="middle">Each loop adds more expedited requests,</text>
+<text x="180" y="326" text-anchor="middle">and reviewers fall behind on cases due that day.</text>
 </svg>
 </figure>
   <p>Many of the requests that came in this way were for services that weren't urgent, like colonoscopies, cataract surgery, and physical therapy.</p>
