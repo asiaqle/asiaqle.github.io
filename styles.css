@@ -108,10 +108,10 @@ strong { font-weight: 500; }
 .hero-title, .voice {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(2.3rem, 5.6vw, 4.2rem);
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
   line-height: 1.1;
   letter-spacing: -0.015em;
-  max-width: 17ch;
+  max-width: 26ch;
   margin: 14px 0 0;
   position: relative;
 }

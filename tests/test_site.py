@@ -19,7 +19,7 @@ PAGES = [
 
 REQUIRED_TEXT = {
     "index.html": [
-        "Asia Le", "Now I fix the workflows", "30%", "fewer review delays", "person rollout",
+        "Asia Le", "I'm a nurse with experience in oncology and utilization management", "I want to move into product management", "30%", "fewer review delays", "person rollout",
         "50%", "faster record retrieval", "CMS", "asiaqle@gmail.com", "linkedin.com/in/asiaqle",
         "Sunrise EHR", "eClinicalWorks",
     ],
@@ -47,7 +47,7 @@ FORBIDDEN_TEXT = [
     "80-person team", "100% reduction", "100% fewer",
     "already past their deadline", "has already passed", "clearer and smaller",
     "biggest declines", "not a knowledge gap",
-    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
+    "Salesforce", "SharePoint", "OneNote", "password", "CityMD", "product manager in the making", "Now I fix the workflows", "Product portfolio", "databases that disagreed", "daily case report", "cut unnecessary expedited requests by", "873890",
     "didn't always agree", "databases that didn't agree",
 ]
 
@@ -473,7 +473,7 @@ class SiteTests(unittest.TestCase):
         self.assertNotRegex(svg, r'(fill|stroke)="var\(')
 
     def test_hero_italic(self):
-        self.assertRegex((ROOT / "index.html").read_text(encoding="utf-8"), r"<em>I fix the workflows\.</em>")
+        self.assertRegex((ROOT / "index.html").read_text(encoding="utf-8"), r"Hi, I'm <em>Asia</em>\.")
 
     def test_branch_labels_readable(self):
         css = (ROOT / "styles.css").read_text(encoding="utf-8")
