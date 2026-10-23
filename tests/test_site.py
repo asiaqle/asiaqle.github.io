@@ -24,7 +24,7 @@ REQUIRED_TEXT = {
         "Sunrise EHR", "eClinicalWorks", "Other work", "EMR lead for a CMS audit", "Initiative Award",
     ],
     "oon-decision-tree.html": [
-        "50 reviewers across an 80-person department", "30%", "100% compliance", "Part B",
+        "50 reviewers in our 80-person department", "30%", "100%", "compliance on expedited and Part B requests", "Part B",
         "training", "compliance", "authorization", "three months",
     ],
     "expedited-loophole.html": [
