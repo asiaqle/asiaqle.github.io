@@ -28,7 +28,7 @@ REQUIRED_TEXT = {
         "training", "compliance", "authorization", "three months",
     ],
     "expedited-loophole.html": [
-        "90%", "Staff noticed", "endoscopy", "physical therapy", "cataract", "letter", "attest",
+        "90%", "staff noticed about 90%", "an estimate based on what the team saw", "endoscopy", "physical therapy", "cataract", "letter", "attest",
         "contact center", "same day",
     ],
     "port-troubleshooting.html": [
