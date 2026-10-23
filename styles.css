@@ -322,3 +322,5 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
   .band .wrap { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; padding-right: 230px; }
   .stat { border-top: 0; border-left: 1px solid rgba(207, 201, 195, 0.35); padding: 6px 0 6px 18px; }
 }
+
+.case-item--static { padding: 22px 0; }
